@@ -1,0 +1,16 @@
+{
+  "name": "form-generator",
+  "version": "1.0.0",
+  "description": "form generator with vanilla js",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "gh-pages -d dist"
+  },
+  "homepage": "http://hamid814.github.io/form-generator",
+  "author": "hamid bakhtiari",
+  "license": "ISC",
+  "dependencies": {
+    "gh-pages": "^2.1.1"
+  }
+}

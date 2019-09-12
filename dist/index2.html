@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="utf-8" />
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <title>formi</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+ <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+
+
+</head>
+<style>
+	.rounded-group:first-child {
+		border-top-left-radius: 1000px;
+		border-bottom-left-radius: 1000px;
+	}
+	.rounded-group:last-child {
+		border-top-right-radius: 1000px;
+		border-bottom-right-radius: 1000px;
+	}
+	.heart {
+		color: #f44;
+		transition: 0.4s;
+	}
+	.f-tr-edit-btn {
+		transition: 0.3s ease-in-out;
+		padding-left: 20px;
+	}
+	.f-tr-del-btn {
+		transition: 0.3s ease-in-out;
+	}
+	.f-tr-clone-btn {
+		transition: 0.3s ease-in-out;
+		padding-right: 20px;
+	}
+	.f-tr-clone-btn:hover {
+		color: red;
+	}
+	#left-section {
+		transition: all 0.3s ease-in;
+	}
+	#left-section {
+		position: relative;
+	}
+	#expand-btn {
+		transition: 0.3s;
+		position: absolute;
+		top: 35%;
+		right: -44px;
+		cursor: pointer;
+		z-index: 1;
+		width: 3px;
+		background-color: #ccc;
+		padding: 30px 22px 30px 7px;
+		text-align: center;
+	}
+	#expand-btn:hover {
+		transition: 0.3s;
+		background-color: #aaa;
+	}
+	#expand-btn:hover .fas {
+		transition: 0.3s;
+		transform: rotateZ(180deg);
+	}
+	.collapse-left {
+		animation: 0.4s collapseAnim forwards;
+	}
+	@keyframes collapseAnim {
+		from {
+			/* opacity: 1; */
+			/* width: 150px; */
+			/* transform: scaleY(0); */
+			/* margin-left: 0; */
+		}
+		to {
+			/* opacity: 0; */
+			/* width: 0; */
+			/* transform: scaleX(0); */
+			/* margin-left: -15%; */
+		}
+	}
+	.expand-left {
+		animation: 0.4s expandAnim forwards;
+	}
+	@keyframes expandAnim {
+		from {
+			/* opacity: 0; */
+			/* width: 150px; */
+			/* transform: rotateY(90deg); */
+			/* margin-left: -15%; */
+		}
+		to {
+			/* opacity: 1; */
+			/* width: 0; */
+			/* transform: rotateY(0); */
+			/* margin-left: 0; */
+		}
+	}
+	.modal {
+		animation: 0.3s fadeIn 1 forwards ease-in;
+	}
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+			margin-top: 1%;
+		}
+		to {
+			opacity: 1;
+			margin-top: 0;
+		}
+	}
+	.fade-out {
+		animation: 0.3s fadeout 1 forwards ease-out;
+	}
+	@keyframes fadeout {
+		from {
+			opacity: 1;
+			margin-top: 0;
+		}
+		to {
+			opacity: 0;
+			margin-top: 1%;
+		}
+	}
+	#add-custom-btn {
+		cursor: pointer;
+	}
+	#final-code {
+		font: 1.2em monospace;
+		border: none;
+		display: none;
+	}
+	#copy-btn {
+		display: none;
+	}
+	#final-view {
+		display: none;
+	}
+	#final-view-btn {
+		display: none;
+	}
+	.f-del-attr-btn:hover {
+		font-weight: bold;
+	}
+	.accardeon-die {
+		animation: 0.3s accardeon;
+	}
+	@keyframes accardeon {
+		/* 0% {
+			transform: rotateZ(0);
+		}
+		33% {
+			transform: rotateZ(-10deg);
+			opacity: 1;
+		}
+		66% {
+			transform: rotateZ(10deg);
+		}
+		100% {
+			transform: rotateZ(-10deg);
+			opacity: 0;
+		} */
+		0% {
+			transform: rotateZ(0);
+			opacity: 1;
+		}
+		20% {
+			/* transform: rotateZ(60deg); */
+		}
+		50% {
+			/* transform: rotateZ(0); */
+		}
+		100% {
+			transform: rotateZ(10deg);
+			opacity: 0;
+		}
+	}
+	.come-up {
+		animation: 0.2s comeUp;
+	}
+	@keyframes comeUp {
+		from {
+			margin-top: 46px;
+		}
+		to {
+			margin-top: 0;
+		}
+	}
+	.new-attr-row {
+		transform: rotateY(90deg);
+	}
+	.accardeon-back {
+		animation: 0.3s accardeon reverse;
+	}
+	.come-down {
+		animation: 0.2s comeUp reverse;
+	}
+	.edit-btn-round {
+		border-radius: 50px;
+		width: 40px;
+		height: 40px;
+		text-align: center !important;
+		margin-right: 10px;
+		padding: 0;
+		opacity: 0;
+	}
+	.edit-row:hover .edit-btn-round {
+		animation: hiddenPanelAnim 0.4s ease-out both;
+		opacity: 1;
+	}
+	@keyframes hiddenPanelAnim {
+		0% {
+			transform: rotateY(70deg);
+			transform-origin: right;
+			opacity: 0;
+		}
+		100% {
+			transform: rotateY(0);
+			transform-origin: right;
+			opacity: 1;
+		}
+	}
+	.right-of-table {
+		width: 200px;
+	}
+</style>
+<body class="bg-secondary">
+														<!-- header -->
+  <header id="header" class="bg-dark mb-3 border-bottom">
+    <div class="container">
+      <i class="fas fa-clipboard-list float-right mt-4 text-white-50 mr-4" id="logo" style="font-size: 60px;"></i>
+      <div id="header-text" class=" text-white">
+        <h1 class="pt-2 text-info">Form Maker</h1>
+      </div>
+      <nav id="nav" class="navbar">
+						<ul class="nav">
+							<li class="btn m-1 f-site-btn" id="bounds">show bounds</li>
+							<li class="btn m-1 f-site-btn" id="theme-2">Theme 2</li>
+							<li class="btn m-1 f-site-btn" id="theme-3">Theme 3</li>
+							<li class="btn m-1 f-site-btn" id="round-btn">btn round</li>
+							<li class="btn m-1 f-site-btn" id="sharp-btn">btn sharp</li>
+						</ul>
+      </nav>
+     </div>
+	</header>
+<div class="container">
+	<div class="row">
+													<!-- section 1 (left) -->
+		<div class="col-4 pt-4 pb-4 border-right text-center" id="left-section">
+			<section id="left-section-s">
+				<div class="row" id="btn-place">
+					
+				</div>
+				
+			</section>
+		</div>
+		<div id="expand-btn" class="rounded-right"><i class="fas fa-chevron-circle-left"></i></div>
+													<!-- section 2 (right) -->
+		<div class="col-8 pt-4" id="right-section">
+			<section id="right-section-s">
+				<table class="table table-borderless table-hover">
+						<thead>
+				
+							</thead>
+							<tbody id="table-body"></tbody>
+				</table>
+			</section>
+			<div class="float-right mr-4 btn-group">
+				<button class="btn text-danger f-site-btn" id="form-clear-btn"><i class="fas fa-broom" id="rotate"></i> clear form</button>
+				<button class="btn text-success f-site-btn" id="form-output-btn"><i class="fas fa-poll-h"></i> Generate code/</button>
+			</div>
+		</div>
+	</div>
+                 		 	    <!-- modal -->
+  <div class="modal" id="modal">
+    <div class="modal-dialog modal-lg" id="modal-dialog">
+      <div class="modal-content" id="modal-content">
+        <div class="modal-header bg-dark text-white-50">
+          <h3><span>Edit </span><span id="modal-title" class="text-info"></span></h3>
+          <span class="float-right close text-white mr-1" id="modal-x-btn">&times;</span>
+        </div>
+        <div class="modal-body bg-secondary" id="modal-body">
+					<!-- modal body -->
+					<div class="container text-center">
+						<div class="p-0">
+							<!-- final code -->
+							<textarea class="col-12 pt-2 m-0" name="final-code" id="final-code" cols="70" rows="10"></textarea>
+						</div>
+						<div class="col-6 m-0" id="final-view">
+							<!-- final view -->
+						</div>
+						<div class="col-6 btn mt-2 f-site-btn" id="copy-btn"><i class="fas fa-copy"></i> copy</div>
+						<div class="col-6 btn mt-2 f-site-btn" id="final-view-btn"><i class="fas fa-copy"></i> see the final view</div>
+					</div>
+					<div class="container">
+						<div class="row">
+							<div class="col-6 border-right">
+								<div class="align-items-start p-1 m-0" id="">
+									<!-- label panel -->hamid
+								</div>
+								<div class="align-items-start p-1 m-0" id="edit-result">
+									<!-- result panel -->
+								</div>
+								<div class="align-items-end p-1 m-0" id="edit-static-panel">
+									<!-- static panel -->
+								</div>
+							</div>
+							<div class="col-6 p-1 pl-4" id="edit-variable-panel">
+								<!-- variable panel -->
+							</div>
+						</div>
+					</div>
+        </div>
+        <div class="modal-footer bg-dark border-top">
+					<button class="btn text-warning f-site-btn" id="modal-discard-btn"><i class="fas fa-times"></i> Discard changes</button>
+          <button class="btn text-success f-site-btn" id="modal-save-btn"><i class="fas fa-save"></i> Save changes</button>
+        </div>
+      </div>
+    </div>
+	</div>
+													<!-- alert modal -->
+	  <div class="modal mt-4" id="alert">
+    <div class="modal-dialog modal-sm">
+     <div class="modal-content text-center border border-dark">
+      <div class="modal-header text-white bg-danger border-danger" id="alert-header">
+       <h2 id="alert-title">Warning!</h2>
+      </div>
+      <div class="modal-body bg-danger text-white p-0" id="alert-body">
+       <div>You havent saved changes!</div>
+       <div>You want to close without saving?</div>
+      </div>
+      <div class="modal-footer bg-danger border-danger" id="alert-footer">
+        <button class="text-primary btn btn-block f-site-btn" id="alert-dont-close-btn">
+          No! dont close.
+         </button>
+        <button class="btn text-warning f-site-btn" id="alert-close-btn">
+          Yes! close
+         </button>
+      </div>
+     </div>
+    </div>
+	 </div>
+													<!-- clear modal -->
+	 <div class="modal" id="clear-modal">
+		 <div class="modal-dialog">
+			 <div class="modal-content bg-warning border-warning border">
+				 <div class="modal-header border-warning border">
+					 <h3>Warning!</h3>
+				 </div>
+				 <div class="modal-body text-center d-flext justify-content-center" id="clear-alert-body">
+					<h6>To clear all the form, type the letter "C" in the field bellow:</h6>
+					<input type="text" id="clear-modal-input" placeholder="Enter here" class="form-control bg-dark border-0 text-warning col-12 text-center mt-3">
+				 </div>
+				 <div class="modal-footer border-warning border">
+					<button class="btn btn-block text-warning f-site-btn" id="clear-btn">Clear the form</button>
+					<button class="btn text-success f-site-btn" id="dont-clear-btn">Dont clear</button>
+				 </div>
+			 </div>
+		 </div>
+	 </div>
+</div>
+													<!-- footer -->
+<footer class="bg-dark mt-5 border-top" id="footer">
+	<div class="container text-center text-white-50 pb-4 pt-4 font-weight-bold">
+		<div class="row">
+			<div class="col-4 border-right border-left">
+				&copy; 2019 "<a href="#" class="text-decoration-none text-info">Hamid Bakhtiari</a>" with <span class="heart" id="heart">♥</span>
+			</div>
+			<div class="col-4 border-right">
+				Powered from <span class="text-primary">B</span>
+				<span class="text-secondary">O</span>
+				<span class="text-light">O</span>
+				<span class="text-warning">T</span>
+				<span class="text-info">S</span>
+				<span class="text-white">T</span>
+				<span class="text-danger">R</span>
+				<span class="text-success">A</span>
+				<span class="text-black">P</span>
+			</div>
+			<div class="col-4 border-right">
+				Written by <sapn class="text-warning">Vanilla Javascript</sapn>
+			</div>
+		</div>
+	</div>
+</footer>
+<script src="main2.js"></script>
+</body>
+</html>
